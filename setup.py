@@ -18,7 +18,7 @@ URL = 'https://github.com/KaivnD/Noa-Core'
 EMAIL = 'KaivnD@hotmail.com'
 AUTHOR = 'KaivnD'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.0.1'
+VERSION = False
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -48,7 +48,7 @@ except FileNotFoundError:
 # Load the package's __version__.py module as a dictionary.
 about = {}
 if not VERSION:
-    project_slug = NAME.lower().replace("-", "_").replace(" ", "_")
+    project_slug = 'Noa'
     with open(os.path.join(here, project_slug, '__version__.py')) as f:
         exec(f.read(), about)
 else:

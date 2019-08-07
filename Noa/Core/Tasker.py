@@ -22,3 +22,13 @@ class ApiTasker (Tasker):
 
     def output(self):
         print('output')
+
+class RunnerTasker (Tasker):
+    def input(self):
+        print('input')
+
+    def process(self):
+        print('process')
+
+    def output(self):
+        print('output')
