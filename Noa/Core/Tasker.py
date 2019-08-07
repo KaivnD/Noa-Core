@@ -1,34 +1,11 @@
-from abc import ABC, abstractmethod
+from Noa.Hooks import Hook
 
-class Tasker (ABC):
-    @abstractmethod
-    def input (self):
-        pass
+class ApiTasker(object):
     
-    @abstractmethod
-    def process (self):
-        pass
+    def __init__(self, filename):
+        self.file = None
+        self.filename = filename
 
-    @abstractmethod
-    def output (self):
-        pass
-
-class ApiTasker (Tasker):
-    def input(self):
-        print('input')
-
-    def process(self):
-        print('process')
-
-    def output(self):
-        print('output')
-
-class RunnerTasker (Tasker):
-    def input(self):
-        print('input')
-
-    def process(self):
-        print('process')
-
-    def output(self):
-        print('output')
+    @Hook
+    def write(self, text):
+        self.file.write(text)
