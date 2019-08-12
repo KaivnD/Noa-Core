@@ -1,22 +1,23 @@
 from Noa.Hooks import Hook
-import urllib.request
-import json,configparser
+import urllib.request,json,configparser,sys,os
 
-class ApiTasker(object):
-
+class Tasker(object):
     def __init__(self, import_data, output_data):
         self.import_data = import_data
         self.output_data = output_data
         self.import_data['config_data'] = self.read_config()
 
+    @Hook
     def read_config(self):
         self.config_data={}
         config = configparser.ConfigParser()
-        config.readfp(open(r'config.ini'))
+        config.readfp(open(self.config_location+'/config.ini'))
         opts=config.options('config')
         for i in opts:
             self.config_data[i]=config.get("config",i)
         return(self.config_data)
+
+class ApiTasker(Tasker):
 
     @Hook
     def process(self):

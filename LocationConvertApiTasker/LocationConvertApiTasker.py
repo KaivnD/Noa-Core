@@ -1,7 +1,12 @@
 from Noa.Core import ApiTasker
 from Noa.Hooks import precall_register, postcall_register
+import sys,os
 
 class LocationConvertApiTasker(ApiTasker):
+    @precall_register('read_config')
+    def config_location(self):
+        self.config_location=os.path.split(os.path.abspath(__file__))[0]
+
 
     @precall_register('process')
     def input(self):
@@ -14,7 +19,7 @@ class LocationConvertApiTasker(ApiTasker):
             return('Error:Unvalid map code!')
 
     @postcall_register('process')
-    def close_file(self):
+    def output(self):
         if self.api_data['status'] == 0:
             self.result=(self.api_data['result'][0]['x'],self.api_data['result'][0]['y'],'BD09ll')
             return(self.result)
