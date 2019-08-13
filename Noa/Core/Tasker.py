@@ -23,7 +23,10 @@ class ApiTasker(Tasker):
     def process(self):
         res = urllib.request.Request(self.url)
         result = urllib.request.urlopen(res).read().decode('utf-8')
-        self.api_data=json.loads(result)
+        try:
+            self.api_data=json.loads(result)
+        except:
+            self.api_data=result
 
     def run(self):
         self.process()
