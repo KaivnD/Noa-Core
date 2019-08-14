@@ -22,6 +22,8 @@ class LocationConvertApiTasker(ApiTasker):
     def output(self):
         if self.api_data['status'] == 0:
             self.result=(self.api_data['result'][0]['x'],self.api_data['result'][0]['y'],'BD09ll')
+            file_name=self.output_data['file_name']
+            self.output_file(self.result,file_name)
             return(self.result)
         else:
             return('Error!')

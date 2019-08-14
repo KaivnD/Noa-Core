@@ -16,6 +16,13 @@ class Tasker(object):
         for i in opts:
             self.config_data[i]=config.get("config",i)
         return(self.config_data)
+    
+    def output_file(self,content,file_name,cover=True):
+        g=lambda: 'w' if cover else 'a'
+        with open(file_name,g()) as f:
+            f.write(str(content))
+        return(True)
+
 
 class ApiTasker(Tasker):
 
@@ -30,4 +37,5 @@ class ApiTasker(Tasker):
 
     def run(self):
         self.process()
+        self.result=True
         return(self.result)

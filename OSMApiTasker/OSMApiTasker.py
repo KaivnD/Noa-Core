@@ -14,9 +14,8 @@ class OSMApiTasker(ApiTasker):
 
     @postcall_register('process')
     def output(self):
-        with open('{}.osm'.format(self.import_data['location']),'w') as f:
-            f.write(str(self.api_data))
-        self.result=True
+        file_name=self.output_data['file_name']
+        self.output_file(self.api_data,file_name)
 
     def location_convert(self):
         width=float(self.import_data['width'])
