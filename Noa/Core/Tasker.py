@@ -19,7 +19,7 @@ class Tasker(object):
     
     def output_file(self,content,file_name,cover=True):
         g=lambda: 'w' if cover else 'a'
-        with open(file_name,g()) as f:
+        with open(file_name,g(),encoding='utf-8') as f:
             f.write(str(content))
         return(True)
 
