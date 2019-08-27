@@ -175,7 +175,6 @@ class OsmConvert(Utils):
 
 
         for way in self.info_dict['way_info']:
-            #'32881263': {'nodes': [(146.25242773565972, 62.26915892096578), (172.27842306686892, 54.90805477719295), (194.73222295988276, 37.82851404488768), (202.70695466303127, 30.800994680996393), (204.4973770742999, 28.4770207138299)], 'info': {'highway': 'secondary', 'name': '上海路', 'oneway': 'yes'}}
             temp=self.info_dict['way_info'][way]
             for i in temp['info']:
                 if i in tag_list:
@@ -186,13 +185,20 @@ class OsmConvert(Utils):
                         tem_layer.Name = layer_name
                         layers.Add(tem_layer)
                     break
-            attr=rhino3dm.ObjectAttributes()
-            attr.LayerIndex = layers.FindName(layer_name,None).Index
-            
+  
             line = rhino3dm.Polyline()
             for node in temp['nodes']:
                 line.Add(node[0],node[1],0)
-            print(layers.FindName(layer_name,None).Index)
-            objects.AddPolyline(line,attr)
+            
+            object_id = objects.AddPolyline(line)
+            '''
+            for xxx in objects:
+                j=j+1
+                if xxx.Attributes.Id == object_id:
+                    print(j)
+            '''
+            print(objects[len(objects)-1].Attributes.Id)
+            #print(layers.FindName(layer_name,None).Index)
+            objects[len(objects)-1].Attributes.LayerIndex = layers.FindName(layer_name,None).Index
         return(True)
 
